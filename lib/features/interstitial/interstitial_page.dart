@@ -1,10 +1,11 @@
 import 'package:go_router/go_router.dart';
-import '../../core/auth/bloc/auth_bloc.dart';
+import '../authentication/bloc/auth_bloc.dart';
 import '../../core/theme/app_colors.dart';
+import '../authentication/authentication_page.dart';
 import '../common/app_logo.dart';
 import '../common_import.dart';
-import '../signin/signin_page.dart';
-import '../signup/signup_page.dart';
+import '../authentication/signin/signin_page.dart';
+import '../authentication/signup/signup_page.dart';
 
 class InterstitialPage extends StatefulWidget {
   const InterstitialPage({super.key});
@@ -43,16 +44,18 @@ class _InterstitialPageState extends State<InterstitialPage> {
                         backgroundColor:
                             MaterialStateProperty.all(AppColors.mmsIndigo)),
                     onPressed: () {
-                      _authBloc.add(SignUpEvent());
-                      context.push(SignupPage.path);
+                      AuthBloc.of(context).add(
+                          AuthTypeEvent(authType: AuthenticationType.signup));
+                      context.push(AuthenticationPage.path);
                     },
                     child: const Text('Open an Account',
                         style: TextStyle(color: Colors.white)),
                   ),
                   OutlinedButton(
                     onPressed: () {
-                      _authBloc.add(SignInEvent());
-                      context.push(SigninPage.path);
+                      AuthBloc.of(context).add(
+                          AuthTypeEvent(authType: AuthenticationType.signin));
+                      context.push(AuthenticationPage.path);
                     },
                     child: const Text('Sign in'),
                   ),

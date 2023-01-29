@@ -1,6 +1,10 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/model/investment_and_service.dart';
 import '../common/mms_text_button.dart';
 import '../common_import.dart';
+import 'bloc/home_bloc.dart';
+import '../common/display_message.dart';
 import 'component/home_service_component.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +18,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    HomeBloc.of(context).add(HomeLoadedEvent());
+    super.initState();
+  }
+
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
@@ -55,28 +65,49 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 200,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) => _summaryList(index),
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          if (state is HomeLoadedState) {
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 200,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: state.data.investmentList?.length,
+                        itemBuilder: (context, index) =>
+                            _summaryList(index, state.data.investmentList),
+                      ),
+                    ),
+                    if (state.data.serviceList != null)
+                      HomeServiceComponent(
+                          serviceList: state.data.serviceList!),
+                  ],
                 ),
               ),
-              HomeServiceComponent(),
-            ],
-          ),
-        ),
+            );
+          } else if (state is HomeLoadingState) {
+            return const DisplayMessage(
+              message: 'Loading',
+              showProgressIndicator: true,
+            );
+          } else if (state is HomeErrorState) {
+            return DisplayMessage(
+              message: state.message,
+            );
+          }
+          return const DisplayMessage(
+            message: 'An error has occured',
+          );
+        },
       ),
       bottomNavigationBar: appBottomNavigationBar(),
     );
   }
 
-  Widget _summaryList(int index) => Container(
+  Widget _summaryList(int index, List<Investment>? list) => Container(
         height: 200.0,
         width: MediaQuery.of(context).size.width - 100,
         margin: EdgeInsets.only(
@@ -94,13 +125,13 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'wallet',
+                list![index].type!.name,
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: AppColors.lightGrey,
                     ),
               ),
               Text(
-                '\$ 540,324.45',
+                '\$ ${list[index].amount}',
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge
@@ -122,6 +153,7 @@ class _HomePageState extends State<HomePage> {
 
   BottomNavigationBar appBottomNavigationBar() {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
@@ -135,14 +167,14 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(Icons.payments_outlined),
           label: 'Payment',
         ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.credit_card_rounded),
-        //   label: 'Credit',
-        // ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.person_2_outlined),
-        //   label: 'Profile',
-        // ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.credit_card_rounded),
+          label: 'Credit',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person_2_outlined),
+          label: 'Profile',
+        ),
       ],
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,

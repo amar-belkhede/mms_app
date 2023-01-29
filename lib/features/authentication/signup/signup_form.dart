@@ -1,11 +1,12 @@
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import '../common/custom_form_field.dart';
-import '../common/mms_text_button.dart';
-import '../common/signup_form_field.dart';
-import '../common_import.dart';
-import '../../util/string_ext.dart';
-import '../confirmation/confirmation_page.dart';
+import '../bloc/auth_bloc.dart';
+import '../../common/custom_form_field.dart';
+import '../../common/mms_text_button.dart';
+import '../../common/signup_form_field.dart';
+import '../../common_import.dart';
+import '../../../util/string_ext.dart';
+import '../confirmation/otp_verification_page.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({
@@ -107,7 +108,8 @@ class _SignupFormState extends State<SignupForm> {
             backgroundColor: AppColors.mmsIndigo,
             onPressed: () {
               if (widget._formKey.currentState!.validate()) {
-                context.push(ConfirmationPage.path);
+                // context.push(OtpVerificationPage.path);
+                AuthBloc.of(context).add(UserRegisteredEvent());
               }
             },
           ),

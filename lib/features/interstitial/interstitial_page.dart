@@ -1,3 +1,4 @@
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import '../authentication/bloc/auth_bloc.dart';
 import '../../core/theme/app_colors.dart';
@@ -18,11 +19,12 @@ class InterstitialPage extends StatefulWidget {
 }
 
 class _InterstitialPageState extends State<InterstitialPage> {
-  late AuthBloc _authBloc;
+
 
   @override
   void initState() {
-    _authBloc = AuthBloc.of(context);
+    Future.delayed(Duration(seconds: 3))
+        .then((value) => {FlutterNativeSplash.remove()});
     super.initState();
   }
 

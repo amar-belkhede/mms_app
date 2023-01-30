@@ -1,11 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../core/model/investment_and_service.dart';
+import '../common/display_message.dart';
 import '../common/mms_text_button.dart';
 import '../common_import.dart';
 import 'bloc/home_bloc.dart';
-import '../common/display_message.dart';
 import 'component/home_service_component.dart';
+import 'component/home_summary_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -77,8 +79,9 @@ class _HomePageState extends State<HomePage> {
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: state.data.investmentList?.length,
-                        itemBuilder: (context, index) =>
-                            _summaryList(index, state.data.investmentList),
+                        itemBuilder: (context, index) => HomeSummaryCard(
+                            index: index,
+                            investment: state.data.investmentList![index]),
                       ),
                     ),
                     if (state.data.serviceList != null)

@@ -47,15 +47,11 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
               message: 'Loading...',
               showProgressIndicator: true,
             );
-          } else if (state is AuthSuccessState) {
-            return Container();
           }
 
-          return Center(
-              child: Text(
-            'Something went wrong',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ));
+          return const DisplayMessage(
+            message: 'Something went wrong',
+          );
         },
       ),
     );

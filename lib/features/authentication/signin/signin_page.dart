@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../util/string_value.dart';
 import '../bloc/auth_bloc.dart';
 import '../../../util/string_ext.dart';
 import '../../common/app_logo.dart';
@@ -42,25 +43,25 @@ class _SigninPageState extends State<SigninPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SignupFormfield(
-                      hintText: 'Phone Number',
+                      hintText: StringValue.phoneNumber,
                       keyboardType: TextInputType.number,
                       bottomPadding: 15,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       validator: (value) {
                         if (value != null && !value.isValidPhone) {
-                          return 'Enter valid phone name, should contain 10 digit';
+                          return StringValue.phoneNumberValidationError;
                         }
                         return null;
                       },
                     ),
                     SignupFormfield(
-                      hintText: 'PIN',
+                      hintText: StringValue.pin,
                       keyboardType: TextInputType.number,
                       bottomPadding: 0,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       validator: (value) {
                         if (value != null && !value.isValidPin) {
-                          return 'Enter valid PIN, should be of 4 digits ';
+                          return StringValue.pinValidationError;
                         }
                         return null;
                       },
@@ -72,7 +73,7 @@ class _SigninPageState extends State<SigninPage> {
                         GestureDetector(
                           onTap: () {},
                           child: Text(
-                            'Forget your Password?',
+                            StringValue.forgetYourPassword,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium
@@ -85,7 +86,7 @@ class _SigninPageState extends State<SigninPage> {
                       height: 30,
                     ),
                     MmsButton(
-                      buttonText: 'Submit',
+                      buttonText: StringValue.submit,
                       textColor: Colors.white,
                       backgroundColor: AppColors.mmsIndigo,
                       onPressed: () {
@@ -101,7 +102,7 @@ class _SigninPageState extends State<SigninPage> {
                         child: GestureDetector(
                           onTap: () {},
                           child: Text(
-                            'Do you have an account? Sign up here',
+                            StringValue.doYouHaveAnAccountSignUpHere,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium
@@ -132,7 +133,7 @@ class _SigninPageState extends State<SigninPage> {
           },
         ),
         Text(
-          'Remember me',
+          StringValue.rememberMe,
           style: Theme.of(context)
               .textTheme
               .labelMedium

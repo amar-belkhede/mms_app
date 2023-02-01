@@ -1,7 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import '../common_import.dart';
 
 import 'custom_form_field.dart';
 

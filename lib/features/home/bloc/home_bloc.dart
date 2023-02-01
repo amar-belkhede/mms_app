@@ -1,10 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 import '../../../core/model/investment_and_service.dart';
 import '../../../core/service/api_service.dart';
+import '../../../util/string_value.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -32,7 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           await _apiService.getAssetsAndServices();
       emit(HomeLoadedState(data: data));
     } catch (_) {
-      emit(HomeErrorState(message: 'An error have occured'));
+      emit(HomeErrorState(message: StringValue.anErrorHasOccured));
     }
   }
 }

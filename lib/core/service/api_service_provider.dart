@@ -20,7 +20,7 @@ class ApiServiceProvider implements ApiService {
       ]
     };
 
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     return InvestmentAndService.fromJson(response);
   }

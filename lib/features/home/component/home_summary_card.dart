@@ -1,4 +1,5 @@
 import '../../../core/model/investment_and_service.dart';
+import '../../../util/string_value.dart';
 import '../../common/mms_text_button.dart';
 import '../../common_import.dart';
 
@@ -47,7 +48,7 @@ class HomeSummaryCard extends StatelessWidget {
               height: 30,
             ),
             MmsButton(
-              buttonText: 'Withdraw Funds',
+              buttonText: StringValue.withdrawFunds,
               fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
               textColor: Colors.white,
               backgroundColor: AppColors.sandyColor,

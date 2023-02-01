@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/model/investment_and_service.dart';
+import '../../util/string_value.dart';
 import '../common/display_message.dart';
 import '../common/mms_text_button.dart';
 import '../common_import.dart';
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         title: Text(
-          'Hello, Jeremy',
+          StringValue.helloUser,
           style: TextStyle(
               color: AppColors.mmsIndigo,
               fontSize: Theme.of(context).textTheme.titleMedium?.fontSize),
@@ -93,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             );
           } else if (state is HomeLoadingState) {
             return const DisplayMessage(
-              message: 'Loading',
+              message: StringValue.loading,
               showProgressIndicator: true,
             );
           } else if (state is HomeErrorState) {
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
             );
           }
           return const DisplayMessage(
-            message: 'An error has occured',
+            message: StringValue.anErrorHasOccured,
           );
         },
       ),
@@ -110,73 +111,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _summaryList(int index, List<Investment>? list) => Container(
-        height: 200.0,
-        width: MediaQuery.of(context).size.width - 100,
-        margin: EdgeInsets.only(
-          left: (index == 0) ? 20 : 0,
-          right: 10,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: AppColors.mmsIndigo,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                list![index].type!.name,
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: AppColors.lightGrey,
-                    ),
-              ),
-              Text(
-                '\$ ${list[index].amount}',
-                style: Theme.of(context)
-                    .textTheme
-                    .labelLarge
-                    ?.copyWith(color: AppColors.lightGrey),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              MmsButton(
-                buttonText: 'Withdraw Funds',
-                fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
-                textColor: Colors.white,
-                backgroundColor: AppColors.sandyColor,
-              )
-            ],
-          ),
-        ),
-      );
-
   BottomNavigationBar appBottomNavigationBar() {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
-          label: 'Home',
+          label: StringValue.home,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.savings_outlined),
-          label: 'Investment',
+          label: StringValue.investment,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.payments_outlined),
-          label: 'Payment',
+          label: StringValue.payment,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.credit_card_rounded),
-          label: 'Credit',
+          label: StringValue.credit,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person_2_outlined),
-          label: 'Profile',
+          label: StringValue.profile,
         ),
       ],
       currentIndex: _selectedIndex,

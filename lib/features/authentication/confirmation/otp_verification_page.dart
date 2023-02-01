@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import '../../../util/string_value.dart';
 import '../bloc/auth_bloc.dart';
 import '../../common/confirmation_form_field.dart';
 import '../../common/custom_form_field.dart';
@@ -47,7 +48,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                'Check your Phone',
+                StringValue.checkYourPhone,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
@@ -55,7 +56,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
               width: 300,
               child: const Text(
                 textAlign: TextAlign.center,
-                'To confirm your account, enter 4 digit code send to +91 7718064894',
+                StringValue.optMessageSubtitle,
               ),
             ),
             const SizedBox(
@@ -139,7 +140,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   MmsButton(
-                    buttonText: 'Submit',
+                    buttonText: StringValue.submit,
                     textColor: Colors.white,
                     backgroundColor: AppColors.mmsIndigo,
                     onPressed: () {
@@ -150,7 +151,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                     },
                   ),
                   MmsButton(
-                    buttonText: 'Resent Code',
+                    buttonText: StringValue.resentCode,
                     textColor: Colors.black,
                     backgroundColor: AppColors.lightGrey,
                     onPressed: () {},

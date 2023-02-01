@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../util/string_value.dart';
 import '../common/display_message.dart';
 import '../common/mms_app_bar.dart';
 import '../common_import.dart';
@@ -44,13 +45,13 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
             return const MessagePage();
           } else if (state is AuthLoadingState) {
             return const DisplayMessage(
-              message: 'Loading...',
+              message: StringValue.loading,
               showProgressIndicator: true,
             );
           }
 
           return const DisplayMessage(
-            message: 'Something went wrong',
+            message: StringValue.somethingWentWrong,
           );
         },
       ),

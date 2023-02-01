@@ -1,5 +1,6 @@
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
+import '../../util/string_value.dart';
 import '../authentication/bloc/auth_bloc.dart';
 import '../../core/theme/app_colors.dart';
 import '../authentication/authentication_page.dart';
@@ -50,7 +51,7 @@ class _InterstitialPageState extends State<InterstitialPage> {
                           AuthTypeEvent(authType: AuthenticationType.signup));
                       context.push(AuthenticationPage.path);
                     },
-                    child: const Text('Open an Account',
+                    child: const Text(StringValue.openAnAccount,
                         style: TextStyle(color: Colors.white)),
                   ),
                   OutlinedButton(
@@ -59,7 +60,7 @@ class _InterstitialPageState extends State<InterstitialPage> {
                           AuthTypeEvent(authType: AuthenticationType.signin));
                       context.push(AuthenticationPage.path);
                     },
-                    child: const Text('Sign in'),
+                    child: const Text(StringValue.signIn),
                   ),
                   const SizedBox(
                     height: 50,

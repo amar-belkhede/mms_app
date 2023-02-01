@@ -1,9 +1,10 @@
 import 'package:go_router/go_router.dart';
 
-import '../bloc/auth_bloc.dart';
+import '../../../util/string_value.dart';
 import '../../common/mms_text_button.dart';
 import '../../common_import.dart';
 import '../../home/home_page.dart';
+import '../bloc/auth_bloc.dart';
 
 class MessagePage extends StatelessWidget {
   const MessagePage({super.key});
@@ -22,7 +23,7 @@ class MessagePage extends StatelessWidget {
               ),
               Text(
                 textAlign: TextAlign.center,
-                'Account Created',
+                StringValue.accountCreated,
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
@@ -33,20 +34,20 @@ class MessagePage extends StatelessWidget {
               ),
               const Text(
                 textAlign: TextAlign.center,
-                'Congratulations. Your account has been created',
+                StringValue.congratulationsMessageAccountCreated,
               ),
               const SizedBox(
                 height: 10,
               ),
               const Text(
                 textAlign: TextAlign.center,
-                'Please click on the "Continue" button to \n get into the app and start taking charge of your finances',
+                StringValue.accountCreationGreeting,
               ),
               const SizedBox(
                 height: 50,
               ),
               MmsButton(
-                buttonText: 'Continue',
+                buttonText: StringValue.continuestring,
                 textColor: Colors.white,
                 backgroundColor: AppColors.mmsIndigo,
                 onPressed: () {

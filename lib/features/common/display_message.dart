@@ -16,8 +16,8 @@ class DisplayMessage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (showProgressIndicator) CircularProgressIndicator(),
-          SizedBox(
+          if (showProgressIndicator) const CircularProgressIndicator(),
+          const SizedBox(
             height: 20,
           ),
           Text(message ?? ''),

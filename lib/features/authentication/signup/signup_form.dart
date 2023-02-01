@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import '../../../util/string_value.dart';
 import '../bloc/auth_bloc.dart';
 import '../../common/custom_form_field.dart';
 import '../../common/mms_text_button.dart';
@@ -32,52 +33,52 @@ class _SignupFormState extends State<SignupForm> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SignupFormfield(
-            hintText: 'First Name',
+            hintText: StringValue.firstName,
             validator: (value) {
               if (value != null && !value.isValidName) {
-                return 'Enter valid first name';
+                return StringValue.enterValidFirstName;
               }
               return null;
             },
           ),
           SignupFormfield(
-            hintText: 'Middle Name',
+            hintText: StringValue.middleName,
             validator: (value) {
               if (value != null && !value.isValidName) {
-                return 'Enter valid middle name';
+                return StringValue.enterValidMiddleName;
               }
               return null;
             },
           ),
           SignupFormfield(
-            hintText: 'Last Name',
+            hintText: StringValue.lastName,
             validator: (value) {
               if (value != null && !value.isValidName) {
-                return 'Enter valid last name';
+                return StringValue.enterValidLastName;
               }
               return null;
             },
           ),
           SignupFormfield(
-            hintText: 'Date of Birth',
+            hintText: StringValue.dateOfBirth,
           ),
           SignupFormfield(
-            hintText: 'Confirm password',
+            hintText: StringValue.confirmPassword,
             obscureText: true,
             validator: (value) {
               if (value != null && !value.isValidPassword) {
-                return 'Enter valid password name, min 8 char, with special char, number, alpha';
+                return StringValue.passwordValidationError;
               }
               return null;
             },
           ),
           SignupFormfield(
-            hintText: 'Phone Number',
+            hintText: StringValue.phoneNumber,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             validator: (value) {
               if (value != null && !value.isValidPhone) {
-                return 'Enter valid phone name, should contain 10 digit';
+                return StringValue.phoneNumberValidationError;
               }
               return null;
             },
@@ -86,7 +87,7 @@ class _SignupFormState extends State<SignupForm> {
             padding: const EdgeInsets.only(bottom: 15.0),
             child: DropdownButtonFormField(
                 decoration: const InputDecoration(
-                  hintText: 'Gender',
+                  hintText: StringValue.gender,
                   border: OutlineInputBorder(),
                 ),
                 items: gender
@@ -96,14 +97,13 @@ class _SignupFormState extends State<SignupForm> {
                         ))
                     .toList(),
                 onChanged: (String? value) {
-                  // This is called when the user selects an item.
                   setState(() {
                     dropdownValue = value!;
                   });
                 }),
           ),
           MmsButton(
-            buttonText: 'Create Account',
+            buttonText: StringValue.createAccount,
             textColor: Colors.white,
             backgroundColor: AppColors.mmsIndigo,
             onPressed: () {

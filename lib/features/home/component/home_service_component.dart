@@ -1,11 +1,12 @@
 import '../../../core/model/investment_and_service.dart';
+import '../../../util/string_value.dart';
 import '../../common_import.dart';
 
 class HomeServiceComponent extends StatelessWidget {
   HomeServiceComponent({
+    Key? key,
     required this.serviceList,
-    super.key,
-  });
+  }) : super(key: key);
 
   final List<Service> serviceList;
   @override
@@ -16,7 +17,7 @@ class HomeServiceComponent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Service',
+            StringValue.service,
           ),
           GridView.count(
             shrinkWrap: true,
@@ -56,16 +57,16 @@ class HomeServiceComponent extends StatelessWidget {
   }
 
   Map<ServiceType, ServiceIcon> serviceTypeToIcons = {
-    ServiceType.fund: ServiceIcon(type: 'Fund', icon: Icons.monetization_on),
+    ServiceType.fund: ServiceIcon(type: StringValue.fund, icon: Icons.monetization_on),
     ServiceType.sendmoney:
-        ServiceIcon(type: 'Send Money', icon: Icons.mobile_friendly_sharp),
+        ServiceIcon(type: StringValue.sendMoney, icon: Icons.mobile_friendly_sharp),
     ServiceType.bankTransfer:
-        ServiceIcon(type: 'Bank Transfer', icon: Icons.other_houses_sharp),
+        ServiceIcon(type: StringValue.bankTransfer, icon: Icons.other_houses_sharp),
     ServiceType.loanrequest:
-        ServiceIcon(type: 'Loan Request', icon: Icons.handshake_rounded),
+        ServiceIcon(type: StringValue.loanRequest, icon: Icons.handshake_rounded),
     ServiceType.airtime:
-        ServiceIcon(type: 'Airtime', icon: Icons.textsms_outlined),
-    ServiceType.cards: ServiceIcon(type: 'Cards', icon: Icons.credit_card),
+        ServiceIcon(type: StringValue.airtime, icon: Icons.textsms_outlined),
+    ServiceType.cards: ServiceIcon(type: StringValue.cards, icon: Icons.credit_card),
   };
 }
 

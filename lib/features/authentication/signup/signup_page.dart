@@ -34,7 +34,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const Text(
                 textAlign: TextAlign.center,
-                'By tapping "Create Account", You will\n accept all terms & Conditions.',
+                StringValue.termsAndConditions,
               )
             ],
           ),

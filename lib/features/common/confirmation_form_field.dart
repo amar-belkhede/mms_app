@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import '../common_import.dart';
 import 'custom_form_field.dart';
 
@@ -12,6 +14,7 @@ class ConfirmationFormField extends StatelessWidget {
     this.onChanged,
     this.textAlign = TextAlign.center,
     this.validator,
+    this.inputFormatters,
   });
 
   final int height;
@@ -21,7 +24,7 @@ class ConfirmationFormField extends StatelessWidget {
   final TextAlign textAlign;
   final TextInputType keyboardType;
   final void Function(String)? onChanged;
-
+  final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
 
   @override
@@ -37,6 +40,7 @@ class ConfirmationFormField extends StatelessWidget {
         keyboardType: TextInputType.number,
         onChanged: onChanged,
         validator: validator,
+        inputFormatters: inputFormatters,
       ),
     );
   }

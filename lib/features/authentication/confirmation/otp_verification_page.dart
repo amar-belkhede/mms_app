@@ -1,14 +1,9 @@
-import 'package:go_router/go_router.dart';
+import 'package:flutter/services.dart';
 
-import '../../../util/string_value.dart';
-import '../bloc/auth_bloc.dart';
 import '../../common/confirmation_form_field.dart';
-import '../../common/custom_form_field.dart';
-import '../../common/mms_app_bar.dart';
 import '../../common/mms_text_button.dart';
 import '../../common_import.dart';
-import '../../home/home_page.dart';
-import '../messageInfo/message_page.dart';
+import '../bloc/auth_bloc.dart';
 
 class OtpVerificationPage extends StatefulWidget {
   const OtpVerificationPage({super.key});
@@ -18,7 +13,7 @@ class OtpVerificationPage extends StatefulWidget {
 }
 
 class _OtpVerificationPageState extends State<OtpVerificationPage> {
-  GlobalKey<FormState> _formKey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   final TextEditingController _fieldOne = TextEditingController();
   final TextEditingController _fieldTwo = TextEditingController();
@@ -26,6 +21,15 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   final TextEditingController _fieldFour = TextEditingController();
 
   bool formCompleted = true;
+
+  @override
+  void dispose() {
+    _fieldOne.dispose();
+    _fieldTwo.dispose();
+    _fieldThree.dispose();
+    _fieldFour.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +56,9 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
-            Container(
+            const SizedBox(
               width: 300,
-              child: const Text(
+              child: Text(
                 textAlign: TextAlign.center,
                 StringValue.optMessageSubtitle,
               ),
@@ -71,62 +75,26 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                     controller: _fieldOne,
                     autofocus: true,
                     onChanged: onChanged,
-                    validator: (value) {
-                      if (value?.length != 1) {
-                        setState(() {
-                          formCompleted = false;
-                        });
-                      } else {
-                        setState(() {
-                          formCompleted = true;
-                        });
-                      }
-                    },
+                    inputFormatters: [LengthLimitingTextInputFormatter(1)],
+                    validator: onOtpValidate,
                   ),
                   ConfirmationFormField(
                     controller: _fieldTwo,
                     onChanged: onChanged,
-                    validator: (value) {
-                      if (value?.length != 1) {
-                        setState(() {
-                          formCompleted = false;
-                        });
-                      } else {
-                        setState(() {
-                          formCompleted = true;
-                        });
-                      }
-                    },
+                    inputFormatters: [LengthLimitingTextInputFormatter(1)],
+                    validator: onOtpValidate,
                   ),
                   ConfirmationFormField(
                     controller: _fieldThree,
                     onChanged: onChanged,
-                    validator: (value) {
-                      if (value?.length != 1) {
-                        setState(() {
-                          formCompleted = false;
-                        });
-                      } else {
-                        setState(() {
-                          formCompleted = true;
-                        });
-                      }
-                    },
+                    inputFormatters: [LengthLimitingTextInputFormatter(1)],
+                    validator: onOtpValidate,
                   ),
                   ConfirmationFormField(
                     controller: _fieldFour,
                     onChanged: onChanged,
-                    validator: (value) {
-                      if (value?.length != 1) {
-                        setState(() {
-                          formCompleted = false;
-                        });
-                      } else {
-                        setState(() {
-                          formCompleted = true;
-                        });
-                      }
-                    },
+                    inputFormatters: [LengthLimitingTextInputFormatter(1)],
+                    validator: onOtpValidate,
                   ),
                 ],
               ),
@@ -163,5 +131,18 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
         ),
       ),
     );
+  }
+
+  String? onOtpValidate(String? value) {
+    if (value?.length != 1) {
+      setState(() {
+        formCompleted = false;
+      });
+    } else {
+      setState(() {
+        formCompleted = true;
+      });
+    }
+    return null;
   }
 }
